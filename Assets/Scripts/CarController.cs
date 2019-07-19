@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    public static CarController instance;
+
     public float carHorsePower;
     float speed, direction, steeringAmount;
     Rigidbody2D rb;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -23,5 +30,13 @@ public class CarController : MonoBehaviour
         rb.AddRelativeForce(Vector2.up * speed);
 
         rb.AddRelativeForce(-Vector2.right * rb.velocity.magnitude * steeringAmount / 2);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("FinishLine"))
+        {
+            RaceController.instance.StartRace();
+        }
     }
 }
