@@ -9,13 +9,21 @@ public class CarController : MonoBehaviour
     public float carHorsePower;
     public TrailRenderer[] trails;
 
+    float currentHorsePower;
     float torque = -150f;
     float speed, steeringAmount;
     float driftSticky = 0.6f;
     float driftSlippy = 1f;
     float maxStickyVelocity = 0.7f;
+    float defaultDragValue = 1;
+    bool inWater;
     bool inDrift;
+    public bool wrongDirection { get; private set; }
+    Vector2 waterVelocity;
+
     Rigidbody2D rb;
+    public AudioSource driftAudioSource;
+    AudioSource carEngine;
 
     private void Awake()
     {
@@ -26,6 +34,7 @@ public class CarController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        carEngine = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -36,6 +45,10 @@ public class CarController : MonoBehaviour
             {
                 trails[i].enabled = true;
             }
+            if (!driftAudioSource.isPlaying && rb.velocity.magnitude > 0.25f)
+                driftAudioSource.PlayOneShot(driftAudioSource.clip);
+            else if (rb.velocity.magnitude <= 0.25f)
+                driftAudioSource.Stop();
         }
         else
         {
@@ -43,18 +56,21 @@ public class CarController : MonoBehaviour
             {
                 trails[i].enabled = false;
             }
+            if (driftAudioSource.isPlaying)
+                driftAudioSource.Stop();
         }
+        carEngine.pitch = Mathf.Lerp(0.8f, 3, rb.velocity.magnitude/5);
     }
 
     void FixedUpdate()
     {
         if (Input.GetButton("Accelerate"))
         {
-            rb.AddForce(transform.up * carHorsePower);
+            rb.AddForce(transform.up * currentHorsePower);
         }
         else if(Input.GetButton("Break"))
         {
-            rb.AddForce(-transform.up * carHorsePower / 2);
+            rb.AddForce(-transform.up * currentHorsePower / 2);
         }
 
         steeringAmount = IsDrivingForward() ? Input.GetAxis("Horizontal") : -Input.GetAxis("Horizontal");
@@ -64,11 +80,35 @@ public class CarController : MonoBehaviour
 
 
         float driftFactor = RightVelocty().magnitude > maxStickyVelocity ? driftSlippy : driftSticky;
-        if (Input.GetButton("HandBreak")) { driftFactor = driftSlippy; rb.drag = 3; }
-        else rb.drag = 1;
-        rb.velocity = ForwardVelocity() + RightVelocty() * driftFactor;
+        if (Input.GetButton("HandBreak"))
+        {
+            driftFactor = driftSlippy;
+            if (currentHorsePower > 0) currentHorsePower -= Time.deltaTime * 5;
+            else currentHorsePower = 0;
+        }
+        else
+        {
+            currentHorsePower = carHorsePower;
+        }
+
+        waterVelocity = Vector2.zero;
+        if (inWater)
+        {
+            driftFactor = driftSticky;
+            waterVelocity = -Vector2.up * 0.2f;
+        }
+
+        rb.velocity = ForwardVelocity() + RightVelocty() * driftFactor + waterVelocity;
 
         inDrift = driftFactor == driftSlippy ? true : false;
+        UpdateDrag();
+    }
+
+    private void UpdateDrag()
+    {
+        rb.drag = defaultDragValue;
+        if (Input.GetButton("HandBreak")) { rb.drag += 2; }
+        if (inWater) rb.drag += 1;
     }
 
     private Vector2 ForwardVelocity()
@@ -92,7 +132,31 @@ public class CarController : MonoBehaviour
     {
         if(collision.CompareTag("FinishLine"))
         {
-            RaceController.instance.StartRace();
+            if (Vector2.Dot(rb.velocity, collision.transform.up) >= 0 && !wrongDirection)
+            {
+                RaceController.instance.StartRace();
+            }
+            else if(Vector2.Dot(rb.velocity, collision.transform.up) >= 0 && wrongDirection)
+            {
+                wrongDirection = false;
+            }
+            else
+            {
+                wrongDirection = true;
+            }
+        }
+        else if (collision.CompareTag("Water"))
+        {
+            inWater = true;
+            collision.GetComponent<AudioSource>().PlayOneShot(collision.GetComponent<AudioSource>().clip);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Water"))
+        {
+            inWater = false;
         }
     }
 }

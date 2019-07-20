@@ -14,13 +14,17 @@ public class RaceController : MonoBehaviour
     public bool raceStarted { get; private set; }
     private float bestRaceTime;
 
+    int raceMinutes;
+    int raceSeconds;
+    float raceMiliseconds;
+
     public float BestRaceTime
     {
         get => bestRaceTime;
         set
         {
             bestRaceTime = value;
-            PlayerPrefs.SetFloat("BestRace", value);
+            PlayerPrefs.SetFloat("BestRace" + CanvasController.RaceId, value);
         }
     }
 
@@ -28,7 +32,7 @@ public class RaceController : MonoBehaviour
     {
         instance = this;
         raceStarted = false;
-        BestRaceTime = PlayerPrefs.GetFloat("BestRace", 0);
+        BestRaceTime = PlayerPrefs.GetFloat("BestRace" + CanvasController.RaceId, 0);
         SetBestRaceText();
     }
 
@@ -37,10 +41,11 @@ public class RaceController : MonoBehaviour
         if (raceStarted)
         {
             raceTime += Time.deltaTime;
-            int minutes = Mathf.FloorToInt(raceTime / 60F);
-            int seconds = Mathf.FloorToInt(raceTime - minutes * 60);
-            float miliseconds = (raceTime - minutes * 60 - seconds) * 1000;
-            timer.text = string.Format("{0:0}:{1:00}:{2:000}", minutes, seconds, miliseconds);
+            raceMinutes = Mathf.FloorToInt(raceTime / 60F);
+            raceSeconds = Mathf.FloorToInt(raceTime - raceMinutes * 60);
+            raceMiliseconds = (raceTime - raceMinutes * 60 - raceSeconds) * 1000;
+            timer.text = string.Format("{0:0}:{1:00}:{2:000}", raceMinutes, raceSeconds, raceMiliseconds);
+            wrongDirection.enabled = CarController.instance.wrongDirection;
         }
     }
 
@@ -50,10 +55,17 @@ public class RaceController : MonoBehaviour
         {
             BestRaceTime = raceTime;
             SetBestRaceText();
-        }
-        raceStarted = true;
-        raceTime = 0;
+        }        
         wrongDirection.enabled = false;
+        raceStarted = false;
+        //Set raceStarted with delay so player can se he's previous time
+        Invoke("StartRaceCounter", 1.0f);
+    }
+
+    private void StartRaceCounter()
+    {
+        raceStarted = true;
+        raceTime = 1.0f;
     }
 
     private void SetBestRaceText()
@@ -62,5 +74,12 @@ public class RaceController : MonoBehaviour
         int seconds = Mathf.FloorToInt(BestRaceTime - minutes * 60);
         float miliseconds = (BestRaceTime - minutes * 60 - seconds) * 1000;
         bestTime.text = "Best - " + string.Format("{0:0}:{1:00}:{2:000}", minutes, seconds, miliseconds);
-    }    
+    }
+
+    public void ResetRace()
+    {
+        raceStarted = false;
+        raceTime = 0;
+        timer.text = "0:00:000";
+    }
 }
