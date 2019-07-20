@@ -64,4 +64,13 @@ public class CanvasController : MonoBehaviour
         }
         menuCanvas.SetActive(true);
     }
+
+    public void ExitGame()
+    {
+#if UNITY_EDTIOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }

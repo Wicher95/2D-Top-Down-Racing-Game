@@ -31,7 +31,11 @@ public class RaceController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        raceStarted = false;
+        raceStarted = false;        
+    }
+
+    private void OnEnable()
+    {
         BestRaceTime = PlayerPrefs.GetFloat("BestRace" + CanvasController.RaceId, 0);
         SetBestRaceText();
     }
@@ -80,6 +84,6 @@ public class RaceController : MonoBehaviour
     {
         raceStarted = false;
         raceTime = 0;
-        timer.text = "0:00:000";
+        timer.text = "0:00:000";        
     }
 }
