@@ -55,7 +55,7 @@ public class RaceController : MonoBehaviour
 
     public void StartRace()
     {
-        if ((raceTime < BestRaceTime || BestRaceTime == 0 ) && raceTime > 0.1f)
+        if ((raceTime < BestRaceTime || BestRaceTime == 0 ) && raceTime > 1.0f)
         {
             BestRaceTime = raceTime;
             SetBestRaceText();
