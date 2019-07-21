@@ -51,11 +51,23 @@ public class CanvasController : MonoBehaviour
         raceTracksHolder.raceTracks[id].SetActive(true);
         menuCanvas.SetActive(false);
         raceCanvas.SetActive(true);
+        OpenWorldController.instance.ChangeRaceUIvisibility(true);
+    }
+
+    public void LoadOpenWorld()
+    {
+        playerCar.SetActive(true);
+        playerCar.transform.position = OpenWorldController.instance.world.transform.GetChild(0).transform.position;
+        playerCar.transform.rotation = OpenWorldController.instance.world.transform.GetChild(0).transform.rotation;
+        menuCanvas.SetActive(false);
+        raceCanvas.SetActive(true);
+        OpenWorldController.instance.world.SetActive(true);
+        OpenWorldController.instance.ChangeRaceUIvisibility(false);
     }
 
     private void QuitToMenu()
     {
-        RaceController.instance.ResetRace();
+        OpenWorldController.instance.world.SetActive(false);
         raceCanvas.SetActive(false);
         playerCar.SetActive(false);
         for (int i = 0; i < raceTracksHolder.raceTracks.Length; i++)

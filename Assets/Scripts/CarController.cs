@@ -95,7 +95,7 @@ public class CarController : MonoBehaviour
         if (inWater)
         {
             driftFactor = driftSticky;
-            waterVelocity = -Vector2.up * 0.2f;
+            waterVelocity = -Vector2.up * 0.07f;
         }
 
         rb.velocity = ForwardVelocity() + RightVelocty() * driftFactor + waterVelocity;
