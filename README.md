@@ -5,7 +5,7 @@ This is a simple 2D racing game made in Unity 2019.1.8.
 ## Getting Started
 
 
-###Controls of the car:
+### Controls of the car:
 ```
 W - Accelerate
 S - Break/Reverse
@@ -13,7 +13,7 @@ A/D - Turning
 Space - HandBreak
 Escape - Quit to menu
 ```
-###Adding new track:
+### Adding new track:
 Track are made out of tiles, you can find ready tilemap in Assets/Tiles folder.
 The easiest way to make a new track is to duplicate existing one, the first child in track must be PlayerSpawnPoint object - position and rotation are important, at this point the player car will be spawned.
 Next thing is FinishLine and attached to it RaceController, remember to rotate finish line in correct direction, so that the UP Vector is faced towards race direction.
