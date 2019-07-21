@@ -154,7 +154,22 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Water"))
+        if (collision.CompareTag("FinishLine"))
+        {
+            if (Vector2.Dot(rb.velocity, collision.transform.up) >= 0 && !wrongDirection)
+            {
+                wrongDirection = false;
+            }
+            else if (Vector2.Dot(rb.velocity, collision.transform.up) >= 0 && wrongDirection)
+            {
+                wrongDirection = false;
+            }
+            else
+            {
+                wrongDirection = true;
+            }
+        }
+        else if(collision.CompareTag("Water"))
         {
             inWater = false;
         }
