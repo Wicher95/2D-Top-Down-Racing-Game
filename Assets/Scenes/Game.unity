@@ -1247,6 +1247,52 @@ Transform:
   m_Father: {fileID: 1011101612}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!1 &805188458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805188460}
+  - component: {fileID: 805188459}
+  m_Layer: 0
+  m_Name: RaceController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &805188459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805188458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d79f34f07938974fa311fc9e90efd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 113174852}
+  bestTime: {fileID: 278760382}
+  wrongDirection: {fileID: 1059894654}
+--- !u!4 &805188460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805188458}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 216.18417, y: 243.36452, z: -43.70943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &871272462
 GameObject:
   m_ObjectHideFlags: 0
@@ -12833,7 +12879,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1614266908}
   - component: {fileID: 1614266910}
-  - component: {fileID: 1614266909}
   m_Layer: 0
   m_Name: FinishLine
   m_TagString: FinishLine
@@ -12855,21 +12900,6 @@ Transform:
   m_Father: {fileID: 1237222221}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1614266909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614266907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d79f34f07938974fa311fc9e90efd0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 113174852}
-  bestTime: {fileID: 278760382}
-  wrongDirection: {fileID: 1059894654}
 --- !u!61 &1614266910
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13539,7 +13569,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1894825163}
   - component: {fileID: 1894825165}
-  - component: {fileID: 1894825164}
   m_Layer: 0
   m_Name: FinishLine
   m_TagString: FinishLine
@@ -13561,21 +13590,6 @@ Transform:
   m_Father: {fileID: 959895806}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &1894825164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894825162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d79f34f07938974fa311fc9e90efd0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 113174852}
-  bestTime: {fileID: 278760382}
-  wrongDirection: {fileID: 1059894654}
 --- !u!61 &1894825165
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13612,7 +13626,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1929129478}
   - component: {fileID: 1929129477}
-  - component: {fileID: 1929129479}
   m_Layer: 0
   m_Name: FinishLine
   m_TagString: FinishLine
@@ -13660,21 +13673,6 @@ Transform:
   m_Father: {fileID: 1011101612}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!114 &1929129479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929129476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d79f34f07938974fa311fc9e90efd0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 113174852}
-  bestTime: {fileID: 278760382}
-  wrongDirection: {fileID: 1059894654}
 --- !u!1 &1998535265
 GameObject:
   m_ObjectHideFlags: 0

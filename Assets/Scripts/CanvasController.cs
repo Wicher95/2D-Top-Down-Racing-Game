@@ -67,6 +67,7 @@ public class CanvasController : MonoBehaviour
 
     private void QuitToMenu()
     {
+        RaceController.instance?.ResetRace();
         OpenWorldController.instance.world.SetActive(false);
         raceCanvas.SetActive(false);
         playerCar.SetActive(false);

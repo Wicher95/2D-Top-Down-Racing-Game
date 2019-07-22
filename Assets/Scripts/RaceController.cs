@@ -40,11 +40,6 @@ public class RaceController : MonoBehaviour
         SetBestRaceText();
     }
 
-    private void OnDisable()
-    {
-        ResetRace();
-    }
-
     private void Update()
     {
         if (raceStarted)
@@ -87,6 +82,7 @@ public class RaceController : MonoBehaviour
 
     public void ResetRace()
     {
+        CancelInvoke("StartRaceCounter");
         raceStarted = false;
         raceTime = 0;
         timer.text = "0:00:000";        
