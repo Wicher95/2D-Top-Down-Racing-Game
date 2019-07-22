@@ -34,7 +34,7 @@ public class RaceController : MonoBehaviour
         raceStarted = false;        
     }
 
-    private void OnEnable()
+    public void OnRaceEnable()
     {
         BestRaceTime = PlayerPrefs.GetFloat("BestRace" + CanvasController.RaceId, 0);
         SetBestRaceText();

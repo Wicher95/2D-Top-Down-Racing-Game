@@ -52,6 +52,7 @@ public class CanvasController : MonoBehaviour
         menuCanvas.SetActive(false);
         raceCanvas.SetActive(true);
         OpenWorldController.instance.ChangeRaceUIvisibility(true);
+        RaceController.instance.OnRaceEnable();
     }
 
     public void LoadOpenWorld()
