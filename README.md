@@ -25,7 +25,7 @@ Escape - Quit to menu
 
 ## Prerequisites
 
-All you need is Unity 2019.1.8.
+All you need is Unity 2019.0.2b
 
 ## Authors
 
