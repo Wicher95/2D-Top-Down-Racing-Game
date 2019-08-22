@@ -1,6 +1,6 @@
 # 2D Top Down Racing Game
 
-This is a simple 2D racing game made in Unity 2019.1.8.
+This is a simple 2D racing game made in Unity 2019.0.2b10
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ Escape - Quit to menu
 
 ## Prerequisites
 
-All you need is Unity 2019.0.2b
+All you need is Unity 2019.0.2b10
 
 ## Authors
 
